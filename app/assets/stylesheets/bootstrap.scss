@@ -1,0 +1,51 @@
+@import 'bootstrap/scss/bootstrap';
+
+/*
+ * JUMBOTRON
+ */
+.jumbotron {
+  background: white asset_url("wallpaper-slim.jpg") center/cover no-repeat;
+  height: 450px;
+  text-align: center;
+}
+
+.jumbotron .cta a {
+  color: yellow;
+}
+
+
+/*
+ * NAVBAR
+ */
+nav.navbar, footer.footer {
+  color: #fff;
+  background-color: #162836 !important;
+}
+
+.navbar-dark a.navbar-brand {
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  font-weight: bold;
+}
+
+/*
+ * FOOTER
+ */
+footer a, footer a:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+
+footer small, footer ul {
+  margin: 0 15px 0 15px;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 15px;
+}
