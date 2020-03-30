@@ -1,6 +1,10 @@
-<h1>New Article</h1>
+<div class="row">
+  <div class="col">
+    <h1 class="text-center">New Article</h1>
+  </div>
+</div>
 
-<% if @article && @article.errors.any? %>
+<% if @article.errors.any? %>
   <h2>Errors while saving article</h2>
   <ul class="error">
   <% @article.errors.full_messages.each do |msg| %>
@@ -9,17 +13,4 @@
   </ul>
 <% end %>
 
-<%= form_with scope: :article, url: articles_path, local: true do |f| %>
-  <p>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
-<p><%= link_to 'Cancel and return to articles', articles_path %></p>
+<%= render 'articles/article_form' %>
