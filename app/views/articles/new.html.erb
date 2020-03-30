@@ -4,13 +4,4 @@
   </div>
 </div>
 
-<% if @article.errors.any? %>
-  <h2>Errors while saving article</h2>
-  <ul class="error">
-  <% @article.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-  <% end %>
-  </ul>
-<% end %>
-
 <%= render 'articles/article_form' %>

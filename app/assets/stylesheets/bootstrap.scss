@@ -53,3 +53,12 @@ footer ul li {
   float: left;
   margin-left: 15px;
 }
+
+/**
+ * FORMS
+ */
+.field_with_errors { display: inline }
+
+.alert-danger ul {
+  margin-bottom: 0;
+}
