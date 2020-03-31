@@ -17,7 +17,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    # hard coded user
+    # @TODO hard coded user -> change to signup concept!!
     @article.user = User.first
     if @article.save
       flash[:success] = "Successfully saved"
