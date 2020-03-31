@@ -3,23 +3,21 @@
     <h1 class="text-center">Overview of articles</h1>
   </div>
 </div>
-<table class="table table-hover">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Title</th>
-      <th scope="col">Description</th>
-      <th scope="col" colspan="3">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @articles.each do |article|  %>
-    <tr>
-      <td><%= article.title %></td>
-      <td><%= article.description %></td>
-      <td><%= link_to 'Show', article_path(article), class: "btn btn-sm btn-primary" %></td>
-      <td><%= link_to 'Edit', edit_article_path(article), class: "btn btn-sm btn-success" %></td>
-      <td><%= link_to 'Delete', article_path(article), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<% @articles.each do |article|  %>
+  <div class="row mb-5">
+    <div class="col-sm-8 offset-sm-2">
+      <div class="card">
+        <div class="card-body">
+          <h5><%= link_to truncate(article.title, length: 40), article_path(article) %></h5>
+          <%= simple_format truncate(article.description, length: 120), class: "card-text" %>
+        </div>
+        <div class="card-footer bg-transparent">
+          <%= link_to 'Edit', edit_article_path(article), class: "btn btn-sm btn-success ml-2" %>
+          <%= link_to 'Delete', article_path(article), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger ml-2" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
