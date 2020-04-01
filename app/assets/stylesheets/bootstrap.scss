@@ -66,8 +66,23 @@ footer ul li {
 /**
  * ARTICLES
  */
-.article-card small {
+.article-card small, .article-author small {
   font-style: italic;
   font-size: 0.7rem;
   color: #999;
+}
+
+.article-author .user-card {
+  border: 0;
+}
+
+.article-author .user-card .card-body {
+  padding: 0;
+}
+
+/**
+ * USERS
+ */
+.user-card {
+  margin-bottom: 15px;
 }

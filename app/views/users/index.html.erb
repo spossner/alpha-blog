@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col">
+    <h1 class="text-center">All bloggers</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <% @users.each do |user| %>
+      <%= render 'user_card', user: user %>
+    <% end %>
+  </div>
+</div>

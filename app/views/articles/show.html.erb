@@ -6,9 +6,17 @@
         <%= simple_format @article.description, class: "card-text" %>
       </div>
       <div class="card-footer bg-transparent">
-        <%= link_to 'Overview', articles_path, class: "btn btn-sm btn-primary" %>
-        <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-sm btn-success ml-2" %>
-        <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger ml-2" %>
+        <div class="article-author">
+          <p><small>Created <%= time_ago_in_words(@article.created_at) %> ago, last updated <%= time_ago_in_words(@article.updated_at) %> ago</small></p>
+          <% if @article.user %>
+            <%= render 'users/user_card', user: @article.user %>
+          <% end %>
+        </div>
+        <div>
+          <%= link_to 'Overview', articles_path, class: "btn btn-sm btn-primary" %>
+          <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-sm btn-success ml-2" %>
+          <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger ml-2" %>
+        </div>
       </div>
     </div>
   </div>
