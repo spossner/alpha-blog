@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-  before_action :find_user_by_id, only: [:edit, :update]
+  before_action :find_user_by_id, only: [:show, :edit, :update]
+
+  def show
+  end
 
   def new
     @user = User.new
