@@ -32,11 +32,19 @@
       </li>
       -->
     </ul>
-    <!--
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-    -->
+    <ul class="navbar-nav">
+      <% if session[:user_id] %>
+        <li class="nav-item">
+          <%= link_to "Hi #{session[:username]}", user_path(session[:user_id]), class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Logout', logout_path, method: "DELETE", class: 'nav-link' %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to 'Log in', login_path, class: 'nav-link' %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </nav>
