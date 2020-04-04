@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :find_user_by_id, only: [:show, :edit, :update]
-  before_action :require_same_user, except: [:index, :show]
+  before_action :find_user_by_id, only: [:show, :edit, :update, :destroy]
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def index
     @users = User.paginate(page: params[:page], per_page: 5)
