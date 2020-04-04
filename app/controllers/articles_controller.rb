@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :find_article_by_id, only: [:show, :edit, :update, :destroy]
   before_action :require_user, except: [:index, :show]  # better to whitelist non public actions
-  before_action :require_same_user, only: [:edit, :update, :destroy]
+  before_action :require_same_user_or_admin, only: [:edit, :update, :destroy]
 
   def show
   end
@@ -14,9 +14,6 @@ class ArticlesController < ApplicationController
     @article = Article.new  # create empty article to be able to render in partial
   end
 
-  def edit
-  end
-
   def create
     @article = Article.new(article_params)
     @article.user = current_user
@@ -26,6 +23,9 @@ class ArticlesController < ApplicationController
     else
       render :new
     end
+  end
+
+  def edit
   end
 
   def update
@@ -53,8 +53,8 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:title, :description)
   end
 
-  def require_same_user
-    if current_user != @article.user  # both variables set by logged_in? or before_action executed prior to this action
+  def require_same_user_or_admin
+    if current_user != @article.user && !is_admin? # both variables set by logged_in? or before_action executed prior to this action
       flash[:danger] = "You can only maintain your own articles"
       redirect_to root_path
     end
