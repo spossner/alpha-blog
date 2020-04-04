@@ -12,11 +12,13 @@
             <%= render 'users/user_card', user: @article.user %>
           <% end %>
         </div>
+        <% if logged_in? && @article.user == current_user %>
         <div>
           <%= link_to 'Overview', articles_path, class: "btn btn-sm btn-primary" %>
           <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-sm btn-success ml-2" %>
           <%= link_to 'Delete', article_path(@article), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger ml-2" %>
         </div>
+        <% end %>
       </div>
     </div>
   </div>
