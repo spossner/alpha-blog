@@ -1,5 +1,6 @@
 class Article < ApplicationRecord
   self.per_page = 5
+  default_scope { order('created_at DESC') }
 
   belongs_to :user
 

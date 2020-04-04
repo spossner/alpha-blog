@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :find_article_by_id, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, except: [:index, :show]  # better to whitelist non public actions
+  before_action :require_same_user, only: [:edit, :update, :destroy]
 
   def show
   end
@@ -17,8 +19,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    # @TODO hard coded user -> change to signup concept!!
-    @article.user = User.first
+    @article.user = current_user
     if @article.save
       flash[:success] = "Successfully saved"
       redirect_to @article
@@ -50,5 +51,12 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :description)
+  end
+
+  def require_same_user
+    if current_user != @article.user  # both variables set by logged_in? or before_action executed prior to this action
+      flash[:danger] = "You can only maintain your own articles"
+      redirect_to root_path
+    end
   end
 end

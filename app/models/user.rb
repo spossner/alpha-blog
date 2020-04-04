@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  default_scope { order('username') }
+
   has_many :articles
 
   before_save { self.email = email.downcase }

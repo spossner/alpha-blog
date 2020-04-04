@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :find_user_by_id, only: [:show, :edit, :update]
+  before_action :require_same_user, except: [:index, :show]
 
   def index
     @users = User.paginate(page: params[:page], per_page: 5)
@@ -44,5 +45,12 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :email, :password)
+  end
+
+  def require_same_user
+    if !logged_in? || current_user != @user  # both variables available because of setting these in logged_in? or prior before actions
+      flash[:danger] = "You can only maintain your own profile"
+      redirect_to root_path
+    end
   end
 end
