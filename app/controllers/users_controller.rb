@@ -18,9 +18,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      flash[:success] = "Welcome to Seppo Blog #{@user.username}"
-      puts "redirect to index"
-      redirect_to @user
+      flash[:success] = "Hi #{@user.username}! Welcome to Seppo's Blog"
+      redirect_to user_path(@user)
     else
       render :new
     end
