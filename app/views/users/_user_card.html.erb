@@ -7,4 +7,9 @@
       <small class="card-text"><%= pluralize(user.articles.count, 'article') if !user.articles.empty? %></small>
     </div>
   </div>
+  <% if is_admin? && current_user != user %>
+    <div class="card-footer bg-transparent">
+      <%= link_to 'Delete', user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger ml-2" %>
+    </div>
+  <% end %>
 </div>

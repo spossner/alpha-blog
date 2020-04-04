@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :find_user_by_id, only: [:show, :edit, :update, :destroy]
-  before_action :require_same_user_or_admin, only: [:edit, :update, :destroy]
+  before_action :require_same_user_or_admin, only: [:edit, :update]
+  before_action :require_admin, only: [:destroy]
 
   def index
     @users = User.paginate(page: params[:page], per_page: 5)
@@ -37,6 +38,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user.destroy
+    flash[:danger] = "User and all articles have been deleted"
+    redirect_to users_path
+  end
+
   private
   def find_user_by_id
     @user = User.find(params[:id])
@@ -44,6 +51,13 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :email, :password)
+  end
+
+  def require_admin
+    if !logged_in? || !is_admin? # both variables available because of setting these in logged_in? or prior before actions
+      flash[:danger] = "You need to be admin"
+      redirect_to root_path
+    end
   end
 
   def require_same_user_or_admin
