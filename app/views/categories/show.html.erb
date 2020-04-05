@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-sm-8 offset-sm-2 text-center">
+    <div class="card">
+      <div class="card-body">
+        <h3><%= @category.name %></h3>
+      </div>
+      <% if logged_in? && is_admin? %>
+        <div class="card-footer bg-transparent">
+          <%= link_to 'Overview', categories_path, class: "btn btn-sm btn-primary" %>
+          <%= link_to 'Edit', edit_category_path(@category), class: "btn btn-sm btn-success ml-2" %>
+          <%= link_to 'Delete', category_path(@category), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger ml-2" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
