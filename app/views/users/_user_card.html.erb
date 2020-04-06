@@ -1,15 +1,17 @@
 <div class="card user-card">
   <div class="card-body row">
     <div class="col-md-6">
-      <h5 class="card-title"><%= link_to gravatar_for(user, size: 30), user_path(user) %> <span class="ml-2"><%= link_to user.username, user_path(user) %></span></h5>
+      <h5 class="card-title">
+        <%= link_to gravatar_for(user, size: 30), user_path(user) %> <span class="ml-2"><%= link_to user.username, user_path(user) %></span>
+        <% if is_admin? && current_user != user %>
+          <small><%= link_to 'Delete', user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "badge badge-pill badge-danger ml-2" %></small>
+        <% end %>
+      </h5>
+
     </div>
     <div class="col-md-6 text-right">
+
       <small class="card-text"><%= pluralize(user.articles.count, 'article') if !user.articles.empty? %></small>
     </div>
   </div>
-  <% if is_admin? && current_user != user %>
-    <div class="card-footer bg-transparent">
-      <%= link_to 'Delete', user_path(user), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger ml-2" %>
-    </div>
-  <% end %>
 </div>
